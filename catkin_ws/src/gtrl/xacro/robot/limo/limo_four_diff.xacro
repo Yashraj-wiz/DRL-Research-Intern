@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!-- LIMO four-wheel diff-drive robot — ROS 1 Noetic / Gazebo 11
+     Source: AgileX limo_description (limo_ros2), adapted for ROS 1.
+     Meshes: package://gtrl/xacro/robot/limo/meshes/
+     Macros:  $(find gtrl)/xacro/robot/limo/limo_xacro.xacro
+     Topics:  /limo/cmd_vel  /limo/odom  (via ROS 1 diff_drive plugin) -->
+
+<robot name="limo_four_diff" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- Wheel/laser/imu/depth-camera link macros (unchanged from official) -->
+    <xacro:include filename="$(find gtrl)/xacro/robot/limo/limo_xacro.xacro" />
+
+    <!-- ═══════════════════ Properties ═══════════════════ -->
+    <xacro:property name="M_PI"               value="3.14159"/>
+    <xacro:property name="base_x_size"        value="0.13"/>
+    <xacro:property name="base_y_size"        value="0.12"/>
+    <xacro:property name="base_z_size"        value="0.10"/>
+    <xacro:property name="wheelbase"          value="0.20"/>
+    <xacro:property name="track"              value="0.13"/>
+    <xacro:property name="wheel_vertical_offset" value="-0.10"/>
+    <xacro:property name="base_mass"          value="2.1557"/>
+    <xacro:property name="wheel_length"       value="0.045"/>
+    <xacro:property name="wheel_radius"       value="0.045"/>
+
+    <!-- ═══════════════════ Base ═══════════════════ -->
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child  link="base_link"/>
+        <origin xyz="0.0 0.0 0.15" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_link">
+        <!-- Visual: official LIMO mesh -->
+        <visual>
+            <origin xyz="0 0 -0.15" rpy="0 0 1.57"/>
+            <geometry>
+                <mesh filename="package://gtrl/xacro/robot/limo/meshes/limo_base.dae" scale="1 1 1"/>
+            </geometry>
+        </visual>
+        <!-- Collision: simple box for performance -->
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="inertial_link">
+        <inertial>
+            <origin xyz="0.0 0.0 0.0"/>
+            <mass value="${base_mass}"/>
+            <inertia ixx="0.24" ixy="0" ixz="0"
+                     iyy="0.96" iyz="0"
+                     izz="0.96"/>
+        </inertial>
+    </link>
+    <joint name="inertial_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child  link="inertial_link"/>
+    </joint>
+
+    <!-- ═══════════════════ Laser ═══════════════════ -->
+    <xacro:limo_laser parent_prefix="base_link" frame_prefix="laser">
+        <origin xyz="0.103 0 -0.034" rpy="0 0 0"/>
+    </xacro:limo_laser>
+
+    <!-- ═══════════════════ Depth camera ═══════════════════ -->
+    <xacro:limo_depth_camera parent_prefix="base_link" frame_prefix="depth_camera">
+        <origin xyz="0.084 0 0.3" rpy="0 0 0"/>
+    </xacro:limo_depth_camera>
+
+    <!-- ═══════════════════ IMU ═══════════════════ -->
+    <xacro:limo_imu parent_prefix="base_link" frame_prefix="imu">
+        <origin xyz="0.0 0 -0.1" rpy="0 0 0"/>
+    </xacro:limo_imu>
+
+    <!-- ═══════════════════ Wheels ═══════════════════ -->
+    <xacro:limo_wheel parent_prefix="base_link" wheel_prefix="front_left" reflect="1">
+        <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0"/>
+    </xacro:limo_wheel>
+
+    <xacro:limo_wheel parent_prefix="base_link" wheel_prefix="front_right" reflect="-1">
+        <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="${M_PI} 0 0"/>
+    </xacro:limo_wheel>
+
+    <xacro:limo_wheel parent_prefix="base_link" wheel_prefix="rear_left" reflect="1">
+        <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0"/>
+    </xacro:limo_wheel>
+
+    <xacro:limo_wheel parent_prefix="base_link" wheel_prefix="rear_right" reflect="-1">
+        <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="${M_PI} 0 0"/>
+    </xacro:limo_wheel>
+
+    <!-- ═══════════════════ Wheel friction ═══════════════════ -->
+    <gazebo reference="front_left_wheel_link">
+        <mu1>100</mu1><mu2>100</mu2><kp>10000000.0</kp><kd>1.0</kd>
+        <minDepth>0.01</minDepth><fdir1>1 0 0</fdir1>
+    </gazebo>
+    <gazebo reference="front_right_wheel_link">
+        <mu1>100</mu1><mu2>100</mu2><kp>10000000.0</kp><kd>1.0</kd>
+        <minDepth>0.01</minDepth><fdir1>1 0 0</fdir1>
+    </gazebo>
+    <gazebo reference="rear_left_wheel_link">
+        <mu1>100</mu1><mu2>100</mu2><kp>10000000.0</kp><kd>1.0</kd>
+        <minDepth>0.01</minDepth><fdir1>1 0 0</fdir1>
+    </gazebo>
+    <gazebo reference="rear_right_wheel_link">
+        <mu1>100</mu1><mu2>100</mu2><kp>10000000.0</kp><kd>1.0</kd>
+        <minDepth>0.01</minDepth><fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <!-- ═══════════════════ Diff-drive plugin (ROS 1) ═══════════════════ -->
+    <gazebo>
+        <plugin name="four_diff_controller" filename="libgazebo_ros_diff_drive.so">
+            <updateRate>50</updateRate>
+            <leftJoint>front_left_wheel</leftJoint>
+            <rightJoint>front_right_wheel</rightJoint>
+            <leftJoint>rear_left_wheel</leftJoint>
+            <rightJoint>rear_right_wheel</rightJoint>
+            <wheelSeparation>0.172</wheelSeparation>
+            <wheelDiameter>0.09</wheelDiameter>
+            <wheelAcceleration>1.0</wheelAcceleration>
+            <wheelTorque>20</wheelTorque>
+            <commandTopic>/limo/cmd_vel</commandTopic>
+            <odometryTopic>/limo/odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>base_footprint</robotBaseFrame>
+            <publishWheelTF>true</publishWheelTF>
+            <publishOdomTF>true</publishOdomTF>
+            <publishWheelJointState>true</publishWheelJointState>
+            <legacyMode>false</legacyMode>
+        </plugin>
+    </gazebo>
+
+    <!-- ═══════════════════ Laser plugin (ROS 1) ═══════════════════ -->
+    <gazebo reference="laser_link">
+        <sensor name="laser" type="ray">
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>120</samples>
+                        <resolution>1.0</resolution>
+                        <min_angle>-3.14159</min_angle>
+                        <max_angle>3.14159</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>15.0</max>
+                    <resolution>0.015</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+            <!-- ROS 1: libgazebo_ros_laser.so publishes directly to /front_laser/scan -->
+            <plugin name="laser_plugin" filename="libgazebo_ros_laser.so">
+                <topicName>/front_laser/scan</topicName>
+                <frameName>laser_link</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>

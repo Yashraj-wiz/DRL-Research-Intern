@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# catkin build artefacts
+catkin_ws/build/
+catkin_ws/devel/
+catkin_ws/install/
+catkin_ws/log/
+catkin_ws/logs/
+catkin_ws/.catkin_tools/
+catkin_ws/.catkin_workspace
+catkin_ws/src/CMakeLists.txt
+
+# Training / evaluation outputs. The curated results shipped with the repo are
+# tracked explicitly (git add -f); anything new written here stays local.
+catkin_ws/src/gtrl/scripts/SAC/final_models/
+catkin_ws/src/gtrl/scripts/SAC/final_curves/
+catkin_ws/src/gtrl/scripts/SAC/results/
+catkin_ws/src/gtrl/scripts/SAC/runs/
+test_eval_output.log
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store

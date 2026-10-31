@@ -1,0 +1,154 @@
+{
+    "best_model": "gtrl_run2_ep1100_reward-50_seed420",
+    "best_reward": 281.673876529495,
+    "all_results": {
+        "gtrl_run2_ep1400_reward-58_seed420": {
+            "average_reward": 252.1691814250286,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep500_reward-44_seed420": {
+            "average_reward": 166.15168733202185,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep600_reward-40_seed420": {
+            "average_reward": 212.34200582683738,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep100_reward-64_seed420": {
+            "average_reward": 169.270484236488,
+            "total_collisions": 2
+        },
+        "gtrl_run2_ep1100_reward-13_seed420": {
+            "average_reward": 222.19044231534446,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep500_reward-45_seed420": {
+            "average_reward": 195.4262350873032,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1995_reward13_seed420": {
+            "average_reward": 235.66952792154126,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep700_reward1_seed420": {
+            "average_reward": 265.8605688015365,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep700_reward-25_seed420": {
+            "average_reward": 102.68285365051952,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep300_reward-33_seed420": {
+            "average_reward": 96.09385237786091,
+            "total_collisions": 3
+        },
+        "gtrl_run2_ep1700_reward30_seed420": {
+            "average_reward": 256.1495783407645,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep100_reward-67_seed420": {
+            "average_reward": 8.528578085087513,
+            "total_collisions": 3
+        },
+        "gtrl_run2_ep1300_reward-2_seed420": {
+            "average_reward": 186.4818770160981,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1000_reward-39_seed420": {
+            "average_reward": 250.78652970610244,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep1600_reward-16_seed420": {
+            "average_reward": 260.5510805411016,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep1000_reward-47_seed420": {
+            "average_reward": 101.77684472239908,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep1700_reward10_seed420": {
+            "average_reward": 219.09959981219242,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep900_reward-17_seed420": {
+            "average_reward": 206.08615155064624,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1100_reward-50_seed420": {
+            "average_reward": 281.673876529495,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep900_reward-53_seed420": {
+            "average_reward": 188.64451077155192,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1400_reward-57_seed420": {
+            "average_reward": 264.12015743627705,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1500_reward-58_seed420": {
+            "average_reward": 267.4536478375354,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep800_reward-36_seed420": {
+            "average_reward": 215.2611735326143,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep1200_reward-1_seed420": {
+            "average_reward": 258.27675066898627,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep200_reward-63_seed420": {
+            "average_reward": 157.8611139962816,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep600_reward0_seed420": {
+            "average_reward": 124.98337153968855,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1800_reward-50_seed420": {
+            "average_reward": 133.99166575190034,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1300_reward-8_seed420": {
+            "average_reward": 196.89455594128842,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep400_reward-68_seed420": {
+            "average_reward": 163.06947647077004,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1600_reward-26_seed420": {
+            "average_reward": 238.15877645486273,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep400_reward-34_seed420": {
+            "average_reward": 227.36011693063637,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep800_reward-50_seed420": {
+            "average_reward": 198.19534314361135,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep300_reward-4_seed420": {
+            "average_reward": 252.57451500285697,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep1200_reward-29_seed420": {
+            "average_reward": 220.26626830308703,
+            "total_collisions": 1
+        },
+        "gtrl_run2_ep1900_reward-65_seed420": {
+            "average_reward": 159.1695803675737,
+            "total_collisions": 2
+        },
+        "gtrl_run2_ep200_reward-69_seed420": {
+            "average_reward": 190.7604461503929,
+            "total_collisions": 0
+        },
+        "gtrl_run2_ep1500_reward-35_seed420": {
+            "average_reward": 204.2364691102487,
+            "total_collisions": 1
+        }
+    }
+}

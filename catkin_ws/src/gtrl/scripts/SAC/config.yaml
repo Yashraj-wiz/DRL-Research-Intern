@@ -1,0 +1,60 @@
+##### gtrl Config #####
+---
+##### DRL #####
+SEED : 420  # Random seed number
+MAX_STEPS : 300
+MAX_EPISODES : 3000  # Maximum number of steps to perform
+BATCH_SIZE : 128  # Size of the mini-batch (Larger is better for stable RL gradients)
+LR_A : 0.0001 # Actor learning rate (reduced for fine-tuning from pretrained weights)
+LR_C : 0.0001 # Critic learning rate (reduced for fine-tuning from pretrained weights)
+GAMMA : 0.99  # Discount factor (slightly reduced from 0.999 to prevent overconfident long-horizon planning)
+TAU : 0.005  # Soft target update variable (should be close to 0)
+ACTOR_FREQ : 1  # Frequency of Actor network updates
+BUFFER_SIZE : 50000   # Increased from 30k — more diverse transitions, less collision-flooding of replay buffer
+FRAME_STACK : 4 # Number of Channel
+PLOT_INTERVAL : 1
+EVAL_THRESHOLD : 100 # episode trigger for evaluation
+EVAL_EPOCH : 5  # number of episodes for evaluation
+SAVE_INTERVAL : 100
+SAVE_THRESHOLD : -200 # episode trigger for saving the model
+REWARD_THRESHOLD : 100 # reward trigger for evaluation
+SAVE : True # whether to save the model or not
+
+###### Attention #####
+PRE_TRAIN : True # Fine-tune from final_models/gtrl_run2_ep1100_reward-50_seed420 (set in main.py)
+ATTENTION_ONLY : False
+P_ATTENTION_FIX : False # whether fix the weights and bias of transformer
+C_ATTENTION_FIX : False # # whether fix the weights and bias of transformer
+
+###### Human Intervention #####
+PRE_BUFFER : False # Human expert buffer
+HUMAN_INTERVENTION : False # whether need guidance from human driver
+
+##### Entropy #####
+AUTO_TUNE : True # whether automatically tune the temperature parameter
+ALPHA : 0.3  # Reduced from 1.0 for fine-tuning — pretrained model had alpha ~0.87 at ep800.
+             # High alpha = max exploration = agent ignores pretrained knowledge.
+             # AUTO_TUNE will continue adjusting from 0.3 onwards.
+LR_ALPHA : 0.001  # increased from 0.0001 — faster alpha decay toward target entropy
+
+##### Environment #####
+ENV_NAME : "RRC"
+DRIVER : 'Oscar'
+ROBOT : 'scout'
+L_SCALE : 0.5
+A_SCALE : 2
+
+##### Algo ######
+SAC:
+    name : 'drl'
+    actor_type : "GaussianConvNet"
+    critic_type : "CNN" # CNN or Transformer
+    block : 0
+    head : 0
+
+GoT-SAC:
+    name : 'gtrl_run3'
+    actor_type : "GaussianTransformer"
+    critic_type : "CNN" # CNN or Transformer
+    block : 2
+    head : 4

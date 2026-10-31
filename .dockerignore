@@ -1,0 +1,23 @@
+# Exclude git metadata from the Docker build context
+.git
+.gitignore
+.gitattributes
+
+# Exclude documentation, figures and host-side tools
+*.md
+*.pdf
+docs/
+tools/
+
+# Exclude output directories (mounted as volumes at runtime)
+catkin_ws/src/gtrl/scripts/SAC/final_models/
+catkin_ws/src/gtrl/scripts/SAC/final_curves/
+catkin_ws/src/gtrl/scripts/SAC/results/
+catkin_ws/src/gtrl/scripts/SAC/runs/
+
+# Exclude Python cache
+catkin_ws/src/gtrl/scripts/SAC/__pycache__/
+catkin_ws/src/gtrl/scripts/Environments/__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo

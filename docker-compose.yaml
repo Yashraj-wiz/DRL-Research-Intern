@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  gotgtrl_training:
+    image: gotgtrl:noetic
+    container_name: gotgtrl_training
+    runtime: nvidia
+    network_mode: host
+    ipc: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - IGN_IP=127.0.0.1
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Persist training outputs on host (survives container restart)
+      - ./catkin_ws/src/gtrl/scripts/SAC/final_models:/workspace/catkin_ws/src/gtrl/scripts/SAC/final_models
+      - ./catkin_ws/src/gtrl/scripts/SAC/final_curves:/workspace/catkin_ws/src/gtrl/scripts/SAC/final_curves
+      - ./catkin_ws/src/gtrl/scripts/SAC/results:/workspace/catkin_ws/src/gtrl/scripts/SAC/results
+      - ./catkin_ws/src/gtrl/scripts/SAC/runs:/workspace/catkin_ws/src/gtrl/scripts/SAC/runs
+    stdin_open: true
+    tty: true
+    command: /bin/bash --rcfile /root/.bashrc

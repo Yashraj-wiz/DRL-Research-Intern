@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="limo" >
+
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find gtrl)/xacro/bringup/materials.xacro" />
+
+  <!-- LIMO diff-drive robot body -->
+  <xacro:include filename="$(find gtrl)/xacro/robot/limo/limo_four_diff.xacro"/>
+
+  <!-- Laser — same sensor as SCOUTMINI baseline -->
+  <xacro:include filename="$(find gtrl)/xacro/laser/hokuyo.xacro"/>
+  <xacro:laser name="front_laser" parent="base_link" xyz="0.103 0 0.05" rpy="0 0 0" meshes="package://gtrl/meshes/laser"/>
+
+  <!-- Depth camera (unused by training, kept for parity) -->
+  <xacro:include filename="$(find gtrl)/xacro/camera/cameraD.xacro"/>
+  <xacro:camD name="cameraD" parent="base_link" xyz="0.084 0 0.1" rpy="0 0 0" />
+
+  <!-- FishEye Camera — same plugin as SCOUTMINI baseline, unchanged -->
+  <xacro:include filename="$(find gtrl)/xacro/camera/cameraFisheye.xacro"/>
+  <xacro:camF name="cameraFishEye" parent="base_link" xyz="0.084 0 0.3" rpy="0 0 0" />
+
+</robot>

@@ -1,0 +1,7 @@
+# Shell scripts and launch files run inside a Linux container: keep LF endings
+* text=auto eol=lf
+*.pth binary
+*.npy binary
+*.png binary
+*.dae binary
+*tfevents* binary
